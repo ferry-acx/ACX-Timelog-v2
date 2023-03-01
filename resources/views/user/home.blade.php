@@ -74,8 +74,9 @@
                                             </div>
                                         </div>
 
+
                                         <div class="task__overlay__cta">
-                                            <button type="submit">{{ __('Logout') }}</button>
+                                            <button type="submit">{{ __('Time Out') }}</button>
                                         </div>
 
                                     </div>
@@ -105,9 +106,11 @@
                                                 {{ session('status') }}
                                             </div>
                                         @endif
+                                          
+                                 
 
                                         <div class="user__dashboard__cta">
-                                            <button onclick="task_on()">Log Out</button>
+                                            <button onclick="task_on()">Time Out</button>
                                         </div>
                                     </div>
                                 </div>

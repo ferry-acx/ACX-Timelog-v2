@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 @section('content')
 @include('includes.messages')
 <div class="user__dashboard">

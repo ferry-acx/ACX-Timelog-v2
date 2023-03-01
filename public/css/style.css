@@ -245,7 +245,7 @@
     pointer-events: none;
 }
 
-.month-list.show {
+.month-list.hide {
     transform: scale(1);
     visibility: visible;
     pointer-events: visible;
