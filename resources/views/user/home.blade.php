@@ -76,7 +76,7 @@
 
 
                                         <div class="task__overlay__cta">
-                                            <button type="submit">{{ __('Time Out') }}</button>
+                                            <button type="submit">{{ __('Submit') }}</button>
                                         </div>
 
                                     </div>
@@ -89,12 +89,13 @@
                     <div class="user__dashboard__item">
                         <div class="user__dashboard__description">
                             <div class="user__dashboard__title">Hello, <span>{{ Auth::user()->username }}!</span></div>
-                            <div class="user__dashboard__subtitle">You are logged in!</div>
                             <div class="user__dashboard__info">You have successfully marked your attendance!</div>
 
                             <div class="user__dashboard__timer">
                                 <div class="card">
-                                    <div class="card-header">{{ __('Time Tracker') }}</div>
+                                    <div class="card-header">{{ __('Time Tracker') }}
+                                        <!-- <div class="card-header" id="clocks">Loading...</div> -->
+                                    </div>
                                     <div class="card-body">
                                         <div class="user__dashboard__content">
                                             <div class="user__dashboard__title m-b-md">
@@ -106,10 +107,8 @@
                                                 {{ session('status') }}
                                             </div>
                                         @endif
-                                          
-                                 
-
                                         <div class="user__dashboard__cta">
+                                            <!-- <button type="submit" class="btn btn-primary col">{{ __('Time in') }}</button> -->
                                             <button onclick="task_on()">Time Out</button>
                                         </div>
                                     </div>
@@ -192,6 +191,38 @@
         const element = document.getElementById('date');
         element.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
     </script>
+    <!-- <script>
+        setInterval(displayclocks, 500);
+
+        function displayclocks() {
+            var time = new Date();
+            var hrs = time.getHours();
+            var min = time.getMinutes();
+            if (hrs > 12) {
+                hrs = hrs - 12;
+            }
+            if (hrs == 0) {
+                hrs = 12;
+            }
+            if (hrs < 10) {
+                hrs = '0' + hrs;
+            }
+            if (min < 10) {
+                min = '0' + min;
+            }
+            document.getElementById("clocks").innerHTML = hrs + ':' + min;
+            var current_time = document.getElementById("clocks").innerHTML = hrs + ':' + min;
+            // $.get( "dashboard.blade.php", function( data ) {
+            //      alert($( 'div', data ).attr('class'));
+            //     }, "html" );
+
+
+            // var timetracker =  current_time -
+        }
+
+        const elements = document.getElementById('date');
+        elements.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
+    </script> -->
 
     <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 

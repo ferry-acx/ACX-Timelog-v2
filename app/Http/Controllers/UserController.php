@@ -63,20 +63,22 @@ class UserController extends Controller
                     //dd(date('Y-m-d H:i:s'));exit;
                     if (Hash::check($request->password, $employee->password)) {
                             if (!Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$employee->id)->first()){
-                                $attendance = new Attendance;
-                                $attendance->user_id = $employee->id;
-                                $attendance->time_in = Carbon::now()->format('g:i A');
-                                $attendance->attendance_date = date("Y-m-d");
-                                $attendance->save();
+                                 $attendance = new Attendance;
+                                 $attendance->user_id = $employee->id;
+                                 $attendance->time_in = Carbon::now()->format('g:i A');
+                                 $attendance->attendance_date = date("Y-m-d");
+                                 $attendance->save();
 
-                            }else{
-                                return redirect()->route('user.login')->with('error','You have already assigned your attendance before.');
-                            }
+                             }else{
+
+                                return redirect(url('user/home'))->with('success','You are now logged in successfully');
+                                 return redirect()->route('user.login')->with('error','You have already assigned your attendance before.');
+                             }
                         } else {
                         return redirect()->route('user.login')->with('error', 'Failed to assign the attendance');
                     }
+                    
                 }
-                return redirect(url('user/home'))->with('success','You are now logged in successfully');
         }else{
             return redirect()->route('user.login')->with('error','Incorrect credentials');
         }
@@ -176,8 +178,7 @@ class UserController extends Controller
                 $save = $attendance->save();
         
                 if( $save ){
-                    Auth::logout();
-                    return redirect('/');
+                    return redirect('/user/home');
                 }else{
                     return redirect()->back()->with('error','Something went wrong, failed to request');
                 }
