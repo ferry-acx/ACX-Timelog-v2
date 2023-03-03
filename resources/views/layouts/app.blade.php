@@ -90,6 +90,7 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
+                        <a href="{{ route('user.login') }}" class="layout__menu">User</a>
                         <a href="{{ route('admin.login') }}" class="layout__menu">Admin</a>
                         @else
 

@@ -70,8 +70,6 @@ class UserController extends Controller
                                  $attendance->save();
 
                              }else{
-
-                                return redirect(url('user/home'))->with('success','You are now logged in successfully');
                                  return redirect()->route('user.login')->with('error','You have already assigned your attendance before.');
                              }
                         } else {
@@ -79,6 +77,7 @@ class UserController extends Controller
                     }
                     
                 }
+                return redirect(url('user/home'))->with('success','You are now logged in successfully');
         }else{
             return redirect()->route('user.login')->with('error','Incorrect credentials');
         }

@@ -15,10 +15,14 @@
     color: hsl(207deg, 71%, 53%);
     text-decoration: none;
     transition: all 300ms ease-in-out;
+    padding: 8px;
 }
 .layout__menu:hover {
     color: hsl(230deg, 87%, 61%);
     text-decoration: none;
+}
+.layout_menu:focus{
+    background-color: hsl(2deg, 76%, 54%);
 }
 
 .login {
