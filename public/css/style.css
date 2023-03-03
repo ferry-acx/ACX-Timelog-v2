@@ -579,4 +579,9 @@
     font-size: larger;
     text-align: center;
 }
+#counter{
+    font-size: 20px;
+    padding-right: 220px;
+    text-align: left;
+}
 

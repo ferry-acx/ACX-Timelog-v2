@@ -93,7 +93,8 @@
 
                             <div class="user__dashboard__timer">
                                 <div class="card">
-                                    <div class="card-header">{{ __('Time Tracker') }}
+                                    <div class="card-header">{{ __('Time consumed:') }}
+                                    <h1 id="counter" class="text-center text-black"></h1>
                                         <!-- <div class="card-header" id="clocks">Loading...</div> -->
                                     </div>
                                     <div class="card-body">
@@ -191,62 +192,34 @@
         const element = document.getElementById('date');
         element.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
     </script>
-    <!-- <script>
-        setInterval(displayclocks, 500);
+    
 
-        function displayclocks() {
-            var time = new Date();
-            var hrs = time.getHours();
-            var min = time.getMinutes();
-            if (hrs > 12) {
-                hrs = hrs - 12;
+    <script>
+        <?php 
+           //Formula for running log time
+           $dateTime = strtotime(' 03, 13:14:00');
+           $getDateTime = date("F d, Y H:i:s", $dateTime); 
+        ?>
+        var countDownDate = new Date("<?php echo "$getDateTime"; ?>").getTime();
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            var now = new Date().getTime();
+            // Find the distance between now an the count down date
+            var distance = now - countDownDate;
+            // Time calculations for days, hours, minutes and seconds
+            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            // Output the result in an element with id="counter"11
+            document.getElementById("counter").innerHTML = + hours + "h " +
+            minutes + "m " + seconds + "s ";
+            // If the count down is over, write some text 
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("counter").innerHTML = "EXPIRED";
             }
-            if (hrs == 0) {
-                hrs = 12;
-            }
-            if (hrs < 10) {
-                hrs = '0' + hrs;
-            }
-            if (min < 10) {
-                min = '0' + min;
-            }
-            document.getElementById("clocks").innerHTML = hrs + ':' + min;
-            var current_time = document.getElementById("clocks").innerHTML = hrs + ':' + min;
-            // $.get( "dashboard.blade.php", function( data ) {
-            //      alert($( 'div', data ).attr('class'));
-            //     }, "html" );
-
-
-            // var timetracker =  current_time -
-        }
-
-        const elements = document.getElementById('date');
-        elements.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
-    </script> -->
-
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-
-    <script>  
-        $('.extra-fields-customer').click(function() {
-            $('.customer_records').clone().appendTo('.customer_records_dynamic');
-            $('.customer_records_dynamic .customer_records').addClass('single remove');
-            $('.single .extra-fields-customer').remove();
-            $('.single').append('<a href="#" class="remove-field btn-remove-customer">-</a>');
-            $('.customer_records_dynamic > .single').attr("class", "remove");
-            
-            $('.customer_records_dynamic input').each(function() {
-            var count = 0;
-            var fieldname = $(this).attr("name");
-            $(this).attr('name', fieldname + count );
-            count++;
-            });
-        
-        });
-        
-        $(document).on('click', '.remove-field', function(e) {
-            $(this).parent('.remove').remove();
-            e.preventDefault();
-        });
-    </script> -->
+        }, 1000);
+    </script>
     
 @endsection
