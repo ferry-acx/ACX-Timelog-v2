@@ -16,6 +16,7 @@
     <script src="{{ asset('js/calendar.js') }}" defer></script>
     <script src="{{ asset('js/tags.js') }}" defer></script>
     <script src="{{ asset('js/pagination.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
 
     <!-- redirect a route after specific time using Jquery in laravel, NOT FORCING LOGGING OUT -->
@@ -47,6 +48,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
     
 
 
@@ -89,9 +93,12 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        @guest
-                        <a href="{{ route('user.login') }}" class="layout__menu">User</a>
-                        <a href="{{ route('admin.login') }}" class="layout__menu">Admin</a>
+                        @guest  
+                        <ul id='main_menu'> 
+                            
+                            <li><a href="{{ route('user.login') }}" class="layout__menu" >User <i class="fa fa-sign-in"></i></a></li>
+                            <li><a href="{{ route('admin.login') }}" class="layout__menu">Admin <i class="fa fa-user"></i></a></li>
+                        </ul>
                         @else
 
                         <li class="nav-item dropdown">

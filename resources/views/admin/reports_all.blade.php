@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table" id="table-id">
+                        <table class="table table-striped" id="table-id">
                             <thead>
                                 <tr class="table__header">
                                     <th class="col-employee_id">Employee ID</th>

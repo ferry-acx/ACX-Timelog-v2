@@ -615,3 +615,31 @@
     padding-top: 20px;
     font-size: 20px;
 }
+ul#main_menu li {
+    display:block;
+    list-style:none;
+    float:left;
+   
+}
+ul#main_menu li a{
+    display: inline-block;
+    background-color: #5DADE2;
+    border: 2px solid;
+    padding: 3px;
+    border-radius: 5px 5px;
+    color: white;
+    text-decoration:none;
+    padding-left: 15px;
+    padding-right: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+ul#main_menu li a:hover {
+    background-color: #2980B9;
+    border: 3px solid;
+}
+ul#main_menu li{
+    position: relative;
+    padding-left: 11px
+}
+
+
