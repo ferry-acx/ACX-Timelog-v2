@@ -312,7 +312,7 @@
     margin-bottom: 0.9375rem;
 }
 .user__dashboard__title span {
-    color: hsl(230deg, 87%, 61%);
+    color: hsl(0, 0%, 0%);
 }
 .user__dashboard__subtitle {
     font-size: 1.5rem;
@@ -580,8 +580,25 @@
     text-align: center;
 }
 #counter{
-    font-size: 20px;
-    padding-right: 220px;
-    text-align: left;
+    font-size: 30px;
+    padding-left: 180px;
+    color: #2E86C1;
+    font-weight: bold;
 }
+.text-center{
+    margin-top: -40px;
+    margin-left: -20px;
 
+}
+.time-track{
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+   
+}
+.time-track-done{
+    padding-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: orange;
+}

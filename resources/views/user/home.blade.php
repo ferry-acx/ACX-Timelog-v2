@@ -88,13 +88,22 @@
                 <div class="user__dashboard__grid">
                     <div class="user__dashboard__item">
                         <div class="user__dashboard__description">
+                            
                             <div class="user__dashboard__title">Hello, <span>{{ Auth::user()->username }}!</span></div>
                             <div class="user__dashboard__info">You have successfully marked your attendance!</div>
-
                             <div class="user__dashboard__timer">
+    
                                 <div class="card">
-                                    <div class="card-header">{{ __('Time consumed:') }}
-                                    <h1 id="counter" class="text-center text-black"></h1>
+                                    <div class="card-header">
+                                    @if(!Auth::user()->time_out)
+                                    <div class="time-track">Time consumed:</div>
+                                    <div id="counter" class="text-center text-black"></div>
+                                    @elseif(Auth::user()->time_out)
+                                    <div class="time-track-done">You have already timed out for this day!</div>
+
+                                    @endif
+    
+                                    
                                         <!-- <div class="card-header" id="clocks">Loading...</div> -->
                                     </div>
                                     <div class="card-body">
@@ -110,7 +119,12 @@
                                         @endif
                                         <div class="user__dashboard__cta">
                                             <!-- <button type="submit" class="btn btn-primary col">{{ __('Time in') }}</button> -->
+                                            @if(Auth::user()->time_out)
+                                            <button disabled="disabled" style="visibility:hidden" onclick="task_on()">Time Out</button>
+                                            @elseif(Auth::user()->time_in)
                                             <button onclick="task_on()">Time Out</button>
+                                            @endif
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -196,8 +210,9 @@
 
     <script>
         <?php 
+
            //Formula for running log time
-           $dateTime = strtotime(' 03, 13:14:00');
+           $dateTime = strtotime(Auth::user()->time_in);
            $getDateTime = date("F d, Y H:i:s", $dateTime); 
         ?>
         var countDownDate = new Date("<?php echo "$getDateTime"; ?>").getTime();
@@ -212,8 +227,12 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             // Output the result in an element with id="counter"11
-            document.getElementById("counter").innerHTML = + hours + "h " +
+         
+            // if(Auth::user()->time_in == null){
+                document.getElementById("counter").innerHTML = + hours + "h " +
             minutes + "m " + seconds + "s ";
+          
+           
             // If the count down is over, write some text 
             if (distance < 0) {
                 clearInterval(x);

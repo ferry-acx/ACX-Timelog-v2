@@ -60,15 +60,19 @@ class UserController extends Controller
    
         if(auth()->attempt(array('username' => $inputVal['username'], 'password' => $inputVal['password']))){
                 if ($employee = User::where('username',request('username'))->first()){
+                    
                     //dd(date('Y-m-d H:i:s'));exit;
                     if (Hash::check($request->password, $employee->password)) {
                             if (!Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$employee->id)->first()){
+                                 $employee->time_in = Carbon::now();
+                                 $employee->time_out = null;
+                                 $employee->save();
                                  $attendance = new Attendance;
                                  $attendance->user_id = $employee->id;
                                  $attendance->time_in = Carbon::now()->format('g:i A');
                                  $attendance->attendance_date = date("Y-m-d");
                                  $attendance->save();
-
+                                 
                              }else{
                                  return redirect()->route('user.login')->with('error','You have already assigned your attendance before.');
                              }
@@ -162,10 +166,13 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$user->id)->first()){
+               
                 $attendance->task = request('task');
                 $attendance->project = request('project');
                 $attendance->location = request('location');
                 $attendance->time_out = Carbon::now()->format('g:i A');
+                $user->time_out = Carbon::now();
+                $user->save();
                 
                 $end = Carbon::parse($attendance->time_out);
                 $start = Carbon::parse($attendance->time_in);
@@ -181,6 +188,7 @@ class UserController extends Controller
                 }else{
                     return redirect()->back()->with('error','Something went wrong, failed to request');
                 }
+           
             
         }
     }
