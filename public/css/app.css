@@ -5890,6 +5890,8 @@ a.close.disabled {
     align-items: flex-start;
     justify-content: space-between;
     padding: 1rem 1rem;
+
+    margin-bottom: -10px;
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: calc(0.3rem - 1px);
     border-top-right-radius: calc(0.3rem - 1px);
@@ -5902,6 +5904,8 @@ a.close.disabled {
 .modal-title {
     margin-bottom: 0;
     line-height: 1.6;
+    padding-top: 44px;
+    font-weight: bolder;
 }
 
 .modal-body {
