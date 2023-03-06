@@ -90,7 +90,12 @@
                         <div class="user__dashboard__description">
                             
                             <div class="user__dashboard__title">Hello, <span>{{ Auth::user()->username }}!</span></div>
-                            <div class="user__dashboard__info">You have successfully marked your attendance!</div>
+                            @if(!Auth::user()->time_out)
+                            <div class="user__dashboard__info_a">You have successfully marked your attendance!</div>
+                            @elseif(Auth::user()->time_out)
+                            <div class="user__dashboard__info_b">You have already timed out for this day!</div>
+                            @endif
+
                             <div class="user__dashboard__timer">
     
                                 <div class="card">
@@ -99,8 +104,7 @@
                                     <div class="time-track">Time consumed:</div>
                                     <div id="counter" class="text-center text-black"></div>
                                     @elseif(Auth::user()->time_out)
-                                    <div class="time-track-done">You have already timed out for this day!</div>
-
+                                    <div class="time-track-done"></div>
                                     @endif
     
                                     

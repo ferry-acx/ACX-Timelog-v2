@@ -12,7 +12,7 @@
 
         @foreach( $attendances as $attendance)
 
-        <tr class="table__ro    w">
+        <tr class="table__row">
             <td>{{$attendance->user->first_name}} {{$attendance->user->last_name}}</td>
             <td>{{$attendance->timeSum}} </td>
             <td></td>

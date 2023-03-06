@@ -321,6 +321,21 @@
     font-size: 1rem;
     margin-bottom: 3rem;
 }
+.user__dashboard__info_a {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    color: #58D68D;
+    font-weight: bold;
+}
+.user__dashboard__info_b {
+    font-size: 1rem;
+    margin-bottom: 3rem;
+    color: #F4D03F;
+    font-weight: bold;
+}
+
+
+
 .user__dashboard__content {
     text-align: center;
 }
@@ -599,6 +614,4 @@
 .time-track-done{
     padding-top: 20px;
     font-size: 20px;
-    font-weight: bold;
-    color: orange;
 }
