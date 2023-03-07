@@ -43,7 +43,7 @@ class AdminController extends Controller
 
     public function dataAtt()
     {
-        return view('admin.homeAdmin')->with(['attendances'=> Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->get()]);
+        return view('admin.homeAdmin')->with(['attendances'=> Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->orderByDesc('updated_at')->get()]);
     }
 
     /**

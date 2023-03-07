@@ -13,6 +13,7 @@
 .pagination-pag li:hover{
     cursor: pointer;
 }
+
 table tbody tr {
 	display: none;
 }

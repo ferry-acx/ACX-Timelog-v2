@@ -24,7 +24,7 @@
 
 
                         <div class="table-responsive">
-                            <table class="table" id="table-id">
+                            <table class="table table-striped" id="table-id">
                                 <thead>
                                     <tr class="table__header">
                                         <th>Date</th>
@@ -75,9 +75,9 @@
                                 </select>
                             </div>
 
-                            <div class="pagination-container">
+                            <div class="pagination-container-pos">
                                 <nav>
-                                    <ul class="pagination-pag">
+                                    <ul>
                                         <li data-page="prev">
                                             <span class="page-link"> Prev <span class="sr-only"></span></span>
                                         </li>

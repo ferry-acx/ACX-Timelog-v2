@@ -10,7 +10,7 @@ function getPagination(table) {
   
        lastPage = 1;
         $('.pagination-pag')
-          .find('li')
+          .find('li') 
           .slice(1, -1)
           .remove();
         var trnum = 0; // reset tr counter

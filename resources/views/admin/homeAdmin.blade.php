@@ -46,21 +46,8 @@
                                         </table>
 
 
-                                        <div class="form-group float-right" style="margin-right:20px"><br><br>
-                                            <div class="table__data">Rows per page:</div>
-                                            <select class="form-control" name="rows" id="maxRows" style="width:90px">
-                                                <option value="5000">Show All Rows</option>
-                                                <option value="5">5</option>
-                                                <option value="10">10</option>
-                                                <option value="15">15</option>
-                                                <option value="20">20</option>
-                                                <option value="50">50</option>
-                                                <option value="70">70</option>
-                                                <option value="100">100</option>
-                                            </select>
-                                        </div>
 
-                                        <div class="pagination-container">
+                                        <div class="pagination-container" style="padding-left:185px">
                                             <nav>
                                                 <ul class="pagination-pag">
                                                     <li data-page="prev">
@@ -74,6 +61,20 @@
                                                     </li>
                                                 </ul>
                                             </nav>
+                                        </div>
+
+                                        <div class="form-group float-right" style="margin-right:20px"><br>
+                                            <div class="table__data">Rows per page:</div>
+                                            <select class="form-control" name="rows" id="maxRows" style="width:90px">
+                                                <option value="5000">Show All Rows</option>
+                                                <option value="5">5</option>
+                                                <option value="10">10</option>
+                                                <option value="15">15</option>
+                                                <option value="20">20</option>
+                                                <option value="50">50</option>
+                                                <option value="70">70</option>
+                                                <option value="100">100</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

@@ -641,5 +641,9 @@ ul#main_menu li{
     position: relative;
     padding-left: 11px
 }
+.pagination-container-pos{
+    text-align: center;
+    padding-left: 500px;
+}
 
 

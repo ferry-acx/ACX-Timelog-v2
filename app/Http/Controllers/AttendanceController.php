@@ -21,6 +21,7 @@ class AttendanceController extends Controller
     public function show2()
     {
         return view('admin.homeAdmin')->with(['attendances'=> Attendance::all()]);
+        
     }
 
     public function assessment($id)

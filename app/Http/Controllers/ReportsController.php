@@ -54,11 +54,9 @@ class ReportsController extends Controller
             array_push($ids,$single_employee->id);
 
         }
-
         //\Log::info(array($start_date,$end_date));
         return view('admin.reports')->with(['employees' => $employee_names,'ids' => $ids, 'attendances'=> $attendance,'dates'=> array($start_date,$end_date)]);
     }
-
 
     public function display()
     {
@@ -69,16 +67,16 @@ class ReportsController extends Controller
     {   
         switch($request->option){
             case 'today':
-                $attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->get();
+                $attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->orderByDesc('updated_at')->get();
                 break;
             case 'month':
-                $attendance = Attendance::whereMonth('attendance_date', Carbon::now()->month)->get();
+                $attendance = Attendance::whereMonth('attendance_date', Carbon::now()->month)->orderByDesc('updated_at')->get();
                 break;
             case 'all':
                 $attendance = Attendance::orderByDesc('updated_at')->get();
                 break;
             default:
-            $attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->get();
+            $attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->orderByDesc('updated_at')->get();
         }
         return view('admin.reports_all')
         ->with(['attendances'=> $attendance]);
@@ -102,6 +100,7 @@ class ReportsController extends Controller
                 ->whereBetween('attendance_date', [$start_date, $end_date])
                 ->where('user_id','=', $request->user_id)
                 ->selectRaw('SEC_TO_TIME( SUM( TIME_TO_SEC( `total_time` ) ) ) AS timeSum')
+                
                 ->get();
         //\Log::info($times);
 

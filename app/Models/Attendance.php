@@ -28,9 +28,7 @@ class Attendance extends Authenticatable
         'project',
         'location',
         'supervisor_ass',
-        'total_time'
-
-
+        'total_time'    
     ];
 
     public function user()
