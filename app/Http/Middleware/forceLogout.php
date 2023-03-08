@@ -21,7 +21,7 @@ class forceLogout
     public function handle(Request $request, Closure $next)
     {
 
-        $midnight = Carbon::now()->endOfDay()->format('g:i A'); //23:59:59
+        $midnight = Carbon::now()->setTime(05, 00, 00)->format('g:i A'); //23:59:59
   
         $check = Carbon::now()->format('g:i A');
         if(Auth::check()){

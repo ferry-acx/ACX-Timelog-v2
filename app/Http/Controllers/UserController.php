@@ -37,7 +37,7 @@ class UserController extends Controller
                 $attendance->task = "SESSION EXPIRED";
                 $attendance->project = "SESSION EXPIRED";
                 $attendance->location = "SESSION EXPIRED";
-                $attendance->time_out = Carbon::now()->endOfDay()->format('g:i A'); //23:59:00
+                $attendance->time_out = Carbon::now()->setTime(05, 00, 00)->format('g:i A'); //23:59:00
                 
                 $end = Carbon::parse($attendance->time_out);
                 $start = Carbon::parse($attendance->time_in);
@@ -74,7 +74,15 @@ class UserController extends Controller
                                  $attendance->save();
                                  
                              }else{
-                                 return redirect()->route('user.login')->with('error','You have already assigned your attendance before.');
+                                $employee->time_in = Carbon::now();
+                                 $employee->time_out = null;
+                                 $employee->save();
+                                 $attendance = new Attendance;
+                                 $attendance->user_id = $employee->id;
+                                 $attendance->time_in = Carbon::now()->format('g:i A');
+                                 $attendance->attendance_date = date("Y-m-d");
+                                 $attendance->save();
+                                 return redirect()->route('user.home');
                              }
                         } else {
                         return redirect()->route('user.login')->with('error', 'Failed to assign the attendance');
@@ -188,8 +196,7 @@ class UserController extends Controller
                 }else{
                     return redirect()->back()->with('error','Something went wrong, failed to request');
                 }
-           
-            
         }
+    
     }
 }
