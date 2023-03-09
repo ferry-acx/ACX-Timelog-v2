@@ -37,8 +37,8 @@ class UserController extends Controller
                 $attendance->task = "SESSION EXPIRED";
                 $attendance->project = "SESSION EXPIRED";
                 $attendance->location = "SESSION EXPIRED";
-                $attendance->time_out = Carbon::now()->setTime(05, 00, 00)->format('g:i A'); //23:59:00
-                
+                $attendance->time_out = setTime(03, 00, 00)->format('g:i A'); //03:00:00
+
                 $end = Carbon::parse($attendance->time_out);
                 $start = Carbon::parse($attendance->time_in);
 
@@ -48,19 +48,19 @@ class UserController extends Controller
                 $save = $attendance->save();
         }
     }
-    
+
     public function check(Request $request)
-    {  
+    {
         $inputVal = $request->all();
-   
+
         $this->validate($request, [
             'username' => 'required|exists:users,username',
             'password' => 'required',
         ]);
-   
+
         if(auth()->attempt(array('username' => $inputVal['username'], 'password' => $inputVal['password']))){
                 if ($employee = User::where('username',request('username'))->first()){
-                    
+
                     //dd(date('Y-m-d H:i:s'));exit;
                     if (Hash::check($request->password, $employee->password)) {
                             if (!Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$employee->id)->first()){
@@ -72,7 +72,7 @@ class UserController extends Controller
                                  $attendance->time_in = Carbon::now()->format('g:i A');
                                  $attendance->attendance_date = date("Y-m-d");
                                  $attendance->save();
-                                 
+
                              }else{
                                 $employee->time_in = Carbon::now();
                                  $employee->time_out = null;
@@ -87,20 +87,20 @@ class UserController extends Controller
                         } else {
                         return redirect()->route('user.login')->with('error', 'Failed to assign the attendance');
                     }
-                    
+
                 }
                 return redirect(url('user/home'))->with('success','You are now logged in successfully');
         }else{
             return redirect()->route('user.login')->with('error','Incorrect credentials');
         }
-    }   
-          
-    
+    }
+
+
 
     public function index1()
     {
         $attendance = Attendance::all()->where('user_id','==', Auth::user()->id);
-      
+
         return view('user.dashboard', [
             'attendances' => $attendance
         ]);
@@ -110,21 +110,21 @@ class UserController extends Controller
     public function index2()
     {
         $attendance = Attendance::all();
-      
+
         return view('user.home', [
             'attendances' => $attendance
         ]);
     }
 
     public function UpdateInfo(Request $request){
-           
+
         $validator = \Validator::make($request->all(),[
             'username'=>'required',
             'first_name'=>'required',
             'last_name'=>'required',
             'position'=>'required',
             'password'=>'required',
-            
+
         ]);
 
         if(!$validator->passes()){
@@ -160,7 +160,7 @@ class UserController extends Controller
             return redirect()->back()->with('error','Something went wrong, failed to update');
         }
     }
-    
+
 
     /**
      * Remove the specified resource from storage.
@@ -173,15 +173,15 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
 
-        if ($attendance = Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$user->id)->first()){
-               
+        if ($attendance = Attendance::where('user_id',$user->id)->latest()->first()){
+
                 $attendance->task = request('task');
                 $attendance->project = request('project');
                 $attendance->location = request('location');
                 $attendance->time_out = Carbon::now()->format('g:i A');
                 $user->time_out = Carbon::now();
                 $user->save();
-                
+
                 $end = Carbon::parse($attendance->time_out);
                 $start = Carbon::parse($attendance->time_in);
 
@@ -190,13 +190,14 @@ class UserController extends Controller
                 $attendance->total_time = gmdate('H:i:s',$length);
 
                 $save = $attendance->save();
-        
+
                 if( $save ){
                     return redirect('/user/home');
                 }else{
                     return redirect()->back()->with('error','Something went wrong, failed to request');
                 }
         }
-    
+
     }
 }
+

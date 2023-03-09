@@ -21,21 +21,21 @@ class forceLogout
     public function handle(Request $request, Closure $next)
     {
 
-        $midnight = Carbon::now()->setTime(05, 00, 00)->format('g:i A'); //23:59:59
-  
+        $midnight = Carbon::now()->setTime(03, 00, 00)->format('g:i A'); //03:00:00
+
         $check = Carbon::now()->format('g:i A');
         if(Auth::check()){
 
-        
+
             if ($attendance = Attendance::where('user_id',Auth::user()->id)->first()){
-            
+
                 if ($check == $midnight)
                 {
                     $attendance->task = "SESSION EXPIRED";
                     $attendance->project = "SESSION EXPIRED";
                     $attendance->location = "SESSION EXPIRED";
                     $attendance->time_out = $midnight;
-                
+
                     $end = Carbon::parse($attendance->time_out);
                     $start = Carbon::parse($attendance->time_in);
 
