@@ -93,7 +93,7 @@
                             @if(!Auth::user()->time_out)
                             <div class="user__dashboard__info_a">You have successfully marked your attendance!</div>
                             @elseif(Auth::user()->time_out)
-                            <div class="user__dashboard__info_b">You have already timed out for this day!</div>
+                            <div class="user__dashboard__info_b">You have successfully timed out!</div>
                             @endif
 
                             <div class="user__dashboard__timer">

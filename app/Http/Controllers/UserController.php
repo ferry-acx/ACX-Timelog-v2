@@ -94,9 +94,6 @@ class UserController extends Controller
             return redirect()->route('user.login')->with('error','Incorrect credentials');
         }
     }
-
-
-
     public function index1()
     {
         $attendance = Attendance::all()->where('user_id','==', Auth::user()->id);
