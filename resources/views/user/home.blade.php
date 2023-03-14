@@ -10,8 +10,7 @@
     -moz-appearance: textfield;
     }
 </style> -->
-
-    <div class="user__dashboard container-py">
+<div class="user__dashboard container-py">
         <div class="row">
             <div class="col">
                     <div id="task-overlay">
@@ -88,26 +87,30 @@
                 <div class="user__dashboard__grid">
                     <div class="user__dashboard__item">
                         <div class="user__dashboard__description">
-                            
+
                             <div class="user__dashboard__title">Hello, <span>{{ Auth::user()->username }}!</span></div>
                             @if(!Auth::user()->time_out)
+                                        @if(Auth::user()->time_in)
                             <div class="user__dashboard__info_a">You have successfully marked your attendance!</div>
+                            @endif
                             @elseif(Auth::user()->time_out)
                             <div class="user__dashboard__info_b">You have successfully timed out!</div>
                             @endif
 
                             <div class="user__dashboard__timer">
-    
+
                                 <div class="card">
                                     <div class="card-header">
                                     @if(!Auth::user()->time_out)
+                                        @if(Auth::user()->time_in)
                                     <div class="time-track">Time consumed:</div>
                                     <div id="counter" class="text-center text-black"></div>
+                                        @endif
                                     @elseif(Auth::user()->time_out)
                                     <div class="time-track-done"></div>
                                     @endif
-    
-                                    
+
+
                                         <!-- <div class="card-header" id="clocks">Loading...</div> -->
                                     </div>
                                     <div class="card-body">
@@ -121,15 +124,44 @@
                                                 {{ session('status') }}
                                             </div>
                                         @endif
-                                        <div class="user__dashboard__cta">
-                                            <!-- <button type="submit" class="btn btn-primary col">{{ __('Time in') }}</button> -->
-                                            @if(Auth::user()->time_out)
-                                            <button disabled="disabled" style="visibility:hidden" onclick="task_on()">Time Out</button>
-                                            @elseif(Auth::user()->time_in)
-                                            <button onclick="task_on()">Time Out</button>
+
+
+                                        @if(!Auth::user()->time_out)
+                                            @if(!Auth::user()->time_in)
+                                                <form  method="POST" action="{{ route('user.timeIn', ['id' => Auth::user()->id]) }}" autocomplete="off">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="form-group row mb-0">
+                                                        <div class="col">
+                                                            <button type="submit" class="btn btn-primary col">
+                                                                {{ __('Time in') }}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             @endif
-                                            
-                                        </div>
+                                        @endif
+
+
+                                        @if(Auth::user()->time_in)
+                                            @if(Auth::user()->time_out)
+                                                <form  method="POST" action="{{ route('user.timeIn', ['id' => Auth::user()->id]) }}" autocomplete="off">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <div class="form-group row mb-0">
+                                                        <div class="col">
+                                                            <button type="submit" class="btn btn-primary col">
+                                                                {{ __('Time in') }}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            @else
+                                                <div class="user__dashboard__cta">
+                                                    <button onclick="task_on()">Time Out</button>
+                                                </div>
+                                            @endif
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +205,7 @@
             </div>
         </div>
     </div>
-    
+
 @endsection
 
 @section('script')
@@ -210,14 +242,14 @@
         const element = document.getElementById('date');
         element.valueAsNumber = Date.now() - (new Date()).getTimezoneOffset() * 60000;
     </script>
-    
+
 
     <script>
-        <?php 
+        <?php
 
            //Formula for running log time
            $dateTime = strtotime(Auth::user()->time_in);
-           $getDateTime = date("F d, Y H:i:s", $dateTime); 
+           $getDateTime = date("F d, Y H:i:s", $dateTime);
         ?>
         var countDownDate = new Date("<?php echo "$getDateTime"; ?>").getTime();
         // Update the count down every 1 second
@@ -231,18 +263,18 @@
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
             // Output the result in an element with id="counter"11
-         
-            // if(Auth::user()->time_in == null){
+
+
                 document.getElementById("counter").innerHTML = + hours + "h " +
             minutes + "m " + seconds + "s ";
-          
-           
-            // If the count down is over, write some text 
+
+
+            // If the count down is over, write some text
             if (distance < 0) {
                 clearInterval(x);
                 document.getElementById("counter").innerHTML = "EXPIRED";
             }
         }, 1000);
     </script>
-    
+
 @endsection

@@ -61,6 +61,24 @@
                                 </tbody>
                             </table>
 
+
+                         
+                            <div class="pagination-container" style="padding-left:280px">
+                                            <nav>
+                                                <ul class="pagination-pag" style="padding-right:280px">
+                                                    <li data-page="prev">
+                                                        <span class="page-link"> Prev <span
+                                                                class="sr-only"></span></span>
+                                                    </li>
+
+                                                    <li data-page="next" id="prev">
+                                                        <span class="page-link"> Next <span
+                                                                class="sr-only"></span></span>
+                                                    </li>
+                                                </ul>
+                                            </nav>
+                            </div>
+
                             <div class="form-group float-right" style="margin-right:20px"><br><br>
                                 <div class="table__data">Rows per page:</div>
                                 <select class="form-control" name="rows" id="maxRows" style="width:90px">
@@ -75,19 +93,6 @@
                                 </select>
                             </div>
 
-                            <div class="pagination-container-pos">
-                                <nav>
-                                    <ul>
-                                        <li data-page="prev">
-                                            <span class="page-link"> Prev <span class="sr-only"></span></span>
-                                        </li>
-
-                                        <li data-page="next" id="prev">
-                                            <span class="page-link"> Next <span class="sr-only"></span></span>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
 
                         </div>
                     </div>

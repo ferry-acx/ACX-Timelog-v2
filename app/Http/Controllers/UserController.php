@@ -66,22 +66,22 @@ class UserController extends Controller
                             if (!Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$employee->id)->first()){
                                  $employee->time_in = Carbon::now();
                                  $employee->time_out = null;
-                                 $employee->save();
+                                //  $employee->save();
                                  $attendance = new Attendance;
                                  $attendance->user_id = $employee->id;
                                  $attendance->time_in = Carbon::now()->format('g:i A');
                                  $attendance->attendance_date = date("Y-m-d");
-                                 $attendance->save();
+                                //  $attendance->save();
 
                              }else{
                                 $employee->time_in = Carbon::now();
                                  $employee->time_out = null;
-                                 $employee->save();
+                                //  $employee->save();
                                  $attendance = new Attendance;
                                  $attendance->user_id = $employee->id;
                                  $attendance->time_in = Carbon::now()->format('g:i A');
                                  $attendance->attendance_date = date("Y-m-d");
-                                 $attendance->save();
+                                //  $attendance->save();
                                  return redirect()->route('user.home');
                              }
                         } else {
@@ -94,6 +94,36 @@ class UserController extends Controller
             return redirect()->route('user.login')->with('error','Incorrect credentials');
         }
     }
+
+    public function timeIn(Request $request){
+
+        $employee = User::find($request->id);
+
+        if (!Attendance::where('attendance_date',Carbon::now()->format('Y-m-d'))->where('user_id',$employee->id)->latest()->first()){
+        $employee->time_in = Carbon::now();
+        $employee->time_out = null;
+        $employee->save();
+        $attendance = new Attendance;
+        $attendance->user_id = $employee->id;
+        $attendance->time_in = Carbon::now()->format('g:i A');
+        $attendance->attendance_date = date("Y-m-d");
+        $attendance->save();
+        return redirect()->route('user.home');
+
+        }
+        else{
+            $employee->time_in = Carbon::now();
+            $employee->time_out = null;
+            $employee->save();
+            $attendance = new Attendance;
+            $attendance->user_id = $employee->id;
+            $attendance->time_in = Carbon::now()->format('g:i A');
+            $attendance->attendance_date = date("Y-m-d");
+            $attendance->save();
+            return redirect()->route('user.home');
+        }
+    }
+
     public function index1()
     {
         $attendance = Attendance::all()->where('user_id','==', Auth::user()->id);

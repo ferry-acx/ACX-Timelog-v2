@@ -246,12 +246,12 @@ class CreateUsersSeeder extends Seeder
                 'first_name'=>'Nech Michelle',
                 'last_name'=>'Tuazon',
                 'position'=>'Graphic Designer',
-                'password'=> bcrypt('ACX-20-042'),
+                'password'=> bcrypt('   '),
             ],
 
-            
+
         ];
-  
+
         foreach ($user as $key => $value) {
             User::create($value);
         }
@@ -274,7 +274,7 @@ class CreateUsersSeeder extends Seeder
             ],
 
         ];
-  
+
         foreach ($admin as $key => $value) {
             Admin::create($value);
         }

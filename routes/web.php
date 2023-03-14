@@ -38,6 +38,7 @@ Route::prefix('user')->name('user.')->group(function(){
    Route::middleware(['auth:web','PreventBackHistory','forceLogout'])->group(function(){
 
       Route::view('/home', 'user.home')->name('home');
+      Route::put('/timeIn/{id}',[UserController::class,'timeIn'])->name('timeIn');
       Route::view('/profile', 'user.profile')->name('profile');
       Route::post('/UpdateInfo', [UserController::class, 'UpdateInfo'])->name('UpdateInfo');
       Route::put('/dashboard/{id}',[UserController::class,'editAttendance'])->name('editAttendance');
@@ -70,10 +71,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
       Route::view('/reports', 'admin.reports')->name('reports');
       Route::get('/reports',[ReportsController::class,'displayReports'])->name('displayReports');
       Route::post('/reports',[ReportsController::class,'displayReportsByDate'])->name('displayReportsByDate');
-     
+
       Route::view('/reports_all', 'admin.reports_all')->name('reports_all');
       Route::get('/reports_all',[ReportsController::class,'displayAllReports'])->name('displayAllReports');
-      
+
       Route::view('/employee', 'admin.employee')->name('employee');
       Route::get('/generatePDF', [PDFController::class, 'generatePDF'])->name('generatePDF');
 
