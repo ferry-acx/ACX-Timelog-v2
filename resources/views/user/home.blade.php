@@ -103,7 +103,7 @@
                                     <div class="card-header">
                                     @if(!Auth::user()->time_out)
                                         @if(Auth::user()->time_in)
-                                    <div class="time-track">Elapsed time:</div>
+                                    <div class="time-track">Elapsed Time:</div>
                                     <div id="counter" class="text-center text-black"></div>
                                         @endif
                                     @elseif(Auth::user()->time_out)
